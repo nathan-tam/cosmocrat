@@ -33,6 +33,11 @@ client.on('interactionCreate', (interaction) => {
         const duration = interaction.options.get('duration').value;
         const location = interaction.options.get('location').value;
     }
+
+    // executes for the 'exams' command
+    if (interaction.commandName === 'exams') {
+        interaction.reply('EXAMS:');
+    }
 });
 
 // login to the bot
