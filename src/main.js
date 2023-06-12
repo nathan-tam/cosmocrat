@@ -59,10 +59,10 @@ client.on('interactionCreate', (interaction) => {
                 const retreivedExams = JSON.parse(data);
 
                 //convert it back into a string
-                const retreivedExamsString = JSON.stringify(retreivedExams);
+                const retreivedExamsString = retreivedExams.join('            ');
 
-                interaction.reply('EXAMS: ' + retreivedExamsString);
-                console.log('EXAMS: ' + retreivedExamsString);
+                interaction.reply('**COURSE               DATE             TIME            LENGTH  LOCATION**\n' + retreivedExamsString);
+                console.log('' + retreivedExamsString);
             }
         });
     }
