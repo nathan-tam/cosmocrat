@@ -1,4 +1,5 @@
 require('dotenv').config();
+const fs = require('fs');
 const { Client, IntentsBitField } = require('discord.js');
 
 // create a new client
@@ -32,11 +33,38 @@ client.on('interactionCreate', (interaction) => {
         const time = interaction.options.get('time').value;
         const duration = interaction.options.get('duration').value;
         const location = interaction.options.get('location').value;
+
+        const examData = [course, date, time, duration, location];
+
+        // convert the array to a string
+        const exams = JSON.stringify(examData);
+
+        // write the array to the file
+        fs.writeFile('exams.csv', exams, (err) => {
+            if (err) {
+                interaction.reply('error writing file', err);
+            } else {
+                interaction.reply('exam added successfully.');
+            }
+        });
     }
 
     // executes for the 'exams' command
     if (interaction.commandName === 'exams') {
-        interaction.reply('EXAMS:');
+        fs.readFile('exams.csv', 'utf8', (err, data) => {
+            if (err) {
+                interaction.reply('error reading file');
+            } else {
+                // read data from file
+                const retreivedExams = JSON.parse(data);
+
+                //convert it back into a string
+                const retreivedExamsString = JSON.stringify(retreivedExams);
+
+                interaction.reply('EXAMS: ' + retreivedExamsString);
+                console.log('EXAMS: ' + retreivedExamsString);
+            }
+        });
     }
 });
 
