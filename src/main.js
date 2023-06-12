@@ -16,13 +16,16 @@ client.on('ready', (c) => {
     console.log(`${c.user.username} is online.`);
 });
 
+// handling the commands
 client.on('interactionCreate', (interaction) => {
     if (!interaction.isChatInputCommand()) return;
 
+    // executes for the 'ping' command
     if (interaction.commandName === 'ping') {
         interaction.reply('pong!');
     }
 
+    // executes for the 'add-exam' command
     if (interaction.commandName === 'add-exam') {
         const course = interaction.options.get('course').value;
         const date = interaction.options.get('date').value;
