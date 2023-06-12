@@ -4,11 +4,11 @@ const { REST, Routes, ApplicationCommandOptionType } = require('discord.js');
 // define the commands
 const commands = [
     {
-        name: 'ping',
+        name: 'ping',                                           // defining the ping command
         description: 'replies with pong!'
     },
     {
-        name: 'add-exam',
+        name: 'add-exam',                                       // defining the add-exam command                       
         description: 'adds an exam to the schedule',
         options: [
             {
@@ -64,6 +64,10 @@ const commands = [
                 required: true,
             },
         ],
+    },
+    {
+        name: 'exams',                                          // defining the exams command
+        description: 'displays the exams in the schedule'
     },
 ]
 
