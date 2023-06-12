@@ -69,6 +69,10 @@ const commands = [
         name: 'exams',                                          // defining the exams command
         description: 'displays the exams in the schedule'
     },
+    {
+        name: 'info',
+        description: 'displays information about the bot'
+    }
 ]
 
 const rest = new REST({ version: '10' }).setToken(process.env.TOKEN);
