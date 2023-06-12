@@ -2,7 +2,6 @@ require('dotenv').config();
 const { REST, Routes, ApplicationCommandOptionType } = require('discord.js');
 
 // define the commands
-
 const commands = [
     {
         name: 'ping',
@@ -71,7 +70,6 @@ const commands = [
 const rest = new REST({ version: '10' }).setToken(process.env.TOKEN);
 
 // function that registers the commands
-
 (async () => {
     try {
         console.log('registring commands...');
