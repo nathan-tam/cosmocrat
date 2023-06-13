@@ -1,5 +1,6 @@
 require('dotenv').config();
 const fs = require('fs');
+const os = require('os');
 const { Client, IntentsBitField } = require('discord.js');
 
 // create a new client
@@ -40,7 +41,8 @@ client.on('interactionCreate', (interaction) => {
         const exams = JSON.stringify(examData);
 
         // write the array to the file
-        fs.writeFile('exams.csv', exams, (err) => {
+        const newline = os.EOL;
+        fs.appendFile('exams.csv', exams + newline, 'utf-8', (err) => {
             if (err) {
                 interaction.reply('error writing file', err);
             } else {
@@ -61,7 +63,7 @@ client.on('interactionCreate', (interaction) => {
                 //convert it back into a string
                 const retreivedExamsString = retreivedExams.join('            ');
 
-                interaction.reply('**COURSE               DATE             TIME            LENGTH  LOCATION**\n' + retreivedExamsString);
+                interaction.reply('**COURSE               DATE             TIME            LENGTH LOCATION**\n' + retreivedExamsString);
                 console.log('' + retreivedExamsString);
             }
         });
