@@ -4,8 +4,8 @@ const { REST, Routes, ApplicationCommandOptionType } = require('discord.js');
 // define the commands
 const commands = [
     {
-        name: 'ping',                                           // defining the ping command
-        description: 'replies with pong!'
+        name: 'info',                                           // defining the info command
+        description: 'displays information about the bot'
     },
     {
         name: 'add-exam',                                       // defining the add-exam command                       
@@ -69,10 +69,6 @@ const commands = [
         name: 'exams',                                          // defining the exams command
         description: 'displays the exams in the schedule'
     },
-    {
-        name: 'info',                                           // defining the info command
-        description: 'displays information about the bot'
-    }
 ]
 
 const rest = new REST({ version: '10' }).setToken(process.env.TOKEN);
