@@ -70,7 +70,7 @@ const commands = [
         description: 'displays the exams in the schedule'
     },
     {
-        name: 'info',
+        name: 'info',                                           // defining the info command
         description: 'displays information about the bot'
     }
 ]
@@ -80,7 +80,7 @@ const rest = new REST({ version: '10' }).setToken(process.env.TOKEN);
 // function that registers the commands
 (async () => {
     try {
-        console.log('registring commands...');
+        console.log('registering commands...');
 
         await rest.put(
             Routes.applicationGuildCommands(process.env.CLIENT_ID, process.env.GUILD_ID),
