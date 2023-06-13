@@ -23,8 +23,8 @@ client.on('interactionCreate', (interaction) => {
     if (!interaction.isChatInputCommand()) return;
 
     // executes for the 'ping' command
-    if (interaction.commandName === 'ping') {
-        interaction.reply('pong!');
+    if (interaction.commandName === 'info') {
+        interaction.reply('**INFORMATION**\n');
     }
 
     // executes for the 'add-exam' command
@@ -51,19 +51,19 @@ client.on('interactionCreate', (interaction) => {
 
     // executes for the 'exams' command
     if (interaction.commandName === 'exams') {
-        const fileContents = fs.readFileSync('exams.txt', 'utf8');
-        const lines = fileContents.split(/\r?\n/);
+        const fileContents = fs.readFileSync('exams.txt', 'utf8');      // reads the content from the 'exams.txt.' file
+        const lines = fileContents.split(/\r?\n/);                      // separates the content into lines
 
         let message = '';
 
+        // loops through each line and replaces each comma with a space
         lines.forEach(line => {
             const modifiedLine = line.replace(/,/g, ' ');
-            console.log(`line from file: ${modifiedLine}`);
 
-            message += modifiedLine + '\n';
+            message += modifiedLine + '\n';                             // adds each line back together with a newline character at the end of each
         });
 
-        interaction.reply(message);
+        interaction.reply(message);                                     // sends the messages to discord
     }
 });
 
