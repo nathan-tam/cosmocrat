@@ -37,36 +37,33 @@ client.on('interactionCreate', (interaction) => {
 
         const examData = [course, date, time, duration, location];
 
-        // convert the array to a string
-        const exams = JSON.stringify(examData);
+        const data = examData.join(',') + '\n';
 
-        // write the array to the file
-        const newline = os.EOL;
-        fs.appendFile('exams.csv', exams + newline, 'utf-8', (err) => {
+        // append data to file
+        fs.appendFile('exams.txt', data, 'utf8', (err) => {
             if (err) {
-                interaction.reply('error writing file', err);
+                interaction.reply('error');
             } else {
-                interaction.reply('exam added successfully.');
+                interaction.reply('success.');
             }
         });
     }
 
     // executes for the 'exams' command
     if (interaction.commandName === 'exams') {
-        fs.readFile('exams.csv', 'utf8', (err, data) => {
-            if (err) {
-                interaction.reply('error reading file');
-            } else {
-                // read data from file
-                const retreivedExams = JSON.parse(data);
+        const fileContents = fs.readFileSync('exams.txt', 'utf8');
+        const lines = fileContents.split(/\r?\n/);
 
-                //convert it back into a string
-                const retreivedExamsString = retreivedExams.join('            ');
+        let message = '';
 
-                interaction.reply('**COURSE               DATE             TIME            LENGTH LOCATION**\n' + retreivedExamsString);
-                console.log('' + retreivedExamsString);
-            }
+        lines.forEach(line => {
+            const modifiedLine = line.replace(/,/g, ' ');
+            console.log(`line from file: ${modifiedLine}`);
+
+            message += modifiedLine + '\n';
         });
+
+        interaction.reply(message);
     }
 });
 
