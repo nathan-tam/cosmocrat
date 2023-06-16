@@ -1,6 +1,7 @@
 require('dotenv').config();
 const fs = require('fs');
 const os = require('os');
+const util = require('util');
 const { Client, IntentsBitField } = require('discord.js');
 
 // create a new client
@@ -56,14 +57,24 @@ client.on('interactionCreate', (interaction) => {
 
         let message = '';
 
-        // loops through each line and replaces each comma with a space
-        lines.forEach(line => {
-            const modifiedLine = line.replace(/,/g, ' ');
+        lines.forEach(line => {                                         // loops through each line and replaces each comma with a space
+            let modifiedLine = line.replace(/,/g, '     ');
+
+            console.log(modifiedLine.length);
+
+            if (modifiedLine.length == 48) {
+                const firstHalf = modifiedLine.slice(0, 18 + 1);
+                const secondHalf = modifiedLine.slice(18 + 1);
+
+                modifiedLine = firstHalf + '  ' + secondHalf;
+            }
 
             message += modifiedLine + '\n';                             // adds each line back together with a newline character at the end of each
         });
 
-        interaction.reply(message);                                     // sends the messages to discord
+        
+
+        interaction.reply(message);
     }
 });
 
