@@ -23,16 +23,11 @@ client.on('ready', (c) => {
 client.on('interactionCreate', (interaction) => {
     if (!interaction.isChatInputCommand()) return;
 
-    // executes for the 'ping' command
-    if (interaction.commandName === 'info') {
-        interaction.reply('**INFORMATION**\n');
-    }
-
     // executes for the 'add-exam' command
     if (interaction.commandName === 'add-exam') {
         const course = interaction.options.get('course').value;
         const date = interaction.options.get('date').value;
-        const time = interaction.options.get('time').value;
+        let time = interaction.options.get('time').value;
         const duration = interaction.options.get('duration').value;
         const location = interaction.options.get('location').value;
 
@@ -43,7 +38,7 @@ client.on('interactionCreate', (interaction) => {
         // append data to file
         fs.appendFile('exams.txt', data, 'utf8', (err) => {
             if (err) {
-                interaction.reply('error');
+                interaction.reply('error.');
             } else {
                 interaction.reply('success.');
             }
@@ -57,22 +52,22 @@ client.on('interactionCreate', (interaction) => {
 
         let message = '';
 
-        lines.forEach(line => {                                         // loops through each line and replaces each comma with a space
-            let modifiedLine = line.replace(/,/g, '     ');
+        // loops through each line and replaces each comma with a space
+        lines.forEach(line => {
+            if (line.length === 35) {
+                const firstHalf = line.slice(0, 23);
+                const secondHalf = line.slice(23);
 
-            console.log(modifiedLine.length);
-
-            if (modifiedLine.length == 48) {
-                const firstHalf = modifiedLine.slice(0, 18 + 1);
-                const secondHalf = modifiedLine.slice(18 + 1);
-
-                modifiedLine = firstHalf + '  ' + secondHalf;
+                line = firstHalf + ' ' + secondHalf;
             }
 
-            message += modifiedLine + '\n';                             // adds each line back together with a newline character at the end of each
+            let modifiedLine = line.replace(/,/g, '     ');
+
+            // adds each line back together with a newline character at the end of each
+            message += modifiedLine + '\n';
         });
 
-        
+        message = '```' + message + '```'
 
         interaction.reply(message);
     }

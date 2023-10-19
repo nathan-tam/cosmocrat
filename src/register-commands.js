@@ -4,10 +4,6 @@ const { REST, Routes, ApplicationCommandOptionType } = require('discord.js');
 // define the commands
 const commands = [
     {
-        name: 'info',                                           // defining the info command
-        description: 'displays information about the bot'
-    },
-    {
         name: 'add-exam',                                       // defining the add-exam command                       
         description: 'adds an exam to the schedule',
         options: [
