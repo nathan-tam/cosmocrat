@@ -9,7 +9,7 @@ const commands = [
         options: [
             {
                 name: 'course',
-                description: 'the course code',
+                description: 'the course code [ABC 1234]',
                 type: ApplicationCommandOptionType.String,
                 required: true,
                 choices: [
@@ -37,25 +37,25 @@ const commands = [
             },
             {
                 name: 'date',
-                description: 'the date of the exam',
+                description: 'the date of the exam [MMM D]',
                 type: ApplicationCommandOptionType.String,
                 required: true,
             },
             {
                 name: 'time',
-                description: 'the start time of the exam',
+                description: 'the start time of the exam [0:00 xM]',
                 type: ApplicationCommandOptionType.String,
                 required: true,
             },
             {
                 name: 'duration',
-                description: 'the duration of the exam',
+                description: 'the duration of the exam [x hr]',
                 type: ApplicationCommandOptionType.String,
                 required: true,
             },
             {
                 name: 'location',
-                description: 'the location of the exam',
+                description: 'the location of the exam [AB 123]',
                 type: ApplicationCommandOptionType.String,
                 required: true,
             },
